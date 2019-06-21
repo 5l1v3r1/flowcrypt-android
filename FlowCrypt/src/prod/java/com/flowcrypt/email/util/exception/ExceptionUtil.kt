@@ -25,7 +25,7 @@ class ExceptionUtil {
      */
     @JvmStatic
     fun handleError(e: Throwable) {
-      if (ExceptionResolver.isHandlingNeeded(e)) {
+      if (true) {
         if (ACRA.isInitialised()) {
           ACRA.getErrorReporter().handleException(ManualHandledException(e))
         }

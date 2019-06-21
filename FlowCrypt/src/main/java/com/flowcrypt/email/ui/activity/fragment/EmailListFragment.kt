@@ -333,7 +333,7 @@ class EmailListFragment : BaseSyncFragment(), AdapterView.OnItemClickListener, A
           }
         }
 
-        super.onErrorOccurred(requestCode, errorType, Exception(errorMsg))
+        super.onErrorOccurred(requestCode, errorType, e)
         setSupportActionBarTitle("")
       }
 
