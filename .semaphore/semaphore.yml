@@ -36,9 +36,9 @@ blocks:
             - docker exec -ti android sudo apt-get -yq install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
             - docker exec -ti android bash -c 'sdkmanager "platform-tools" "platforms;android-29" "emulator" "extras;google;m2repository" "build-tools;29.0.2"'
             - docker exec -ti android bash -c 'sdkmanager "system-images;android-29;google_apis;x86_64"'
-            - echo no | avdmanager -v create avd --name ci-test-pixel-x86-64-api29 --package "system-images;android-29;google_apis;x86_64" --device 'pixel' --abi 'google_apis/x86_64'
-            - emulator -list-avds # debug
-            - emulator -no-window -avd ci-test-pixel-x86-64-api29 -no-boot-anim -no-audio -gpu off& # start emulator in the background
+            - docker exec -ti android bash -c 'echo no | avdmanager -v create avd --name ci-test-pixel-x86-64-api29 --package "system-images;android-29;google_apis;x86_64" --device 'pixel' --abi 'google_apis/x86_64''
+            - docker exec -ti android emulator -list-avds # debug
+            - docker exec -ti android emulator -no-window -avd ci-test-pixel-x86-64-api29 -no-boot-anim -no-audio -gpu off& # start emulator in the background
             - $SEMAPHORE_GIT_DIR/script/ci-wait-for-emulator.sh # wait till ready
             - ( cd $SEMAPHORE_GIT_DIR && ./script/ci-tests-without-mailserver.sh )
 
