@@ -32,6 +32,7 @@ blocks:
             - cache restore $BUILD_CACHE
 
             # build + test
+            - docker exec -ti android bash -c 'echo ANDROID_HOME'
             - docker exec -ti android sudo apt-get update
             - docker exec -ti android sudo apt-get -yq install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
             - docker exec -ti android bash -c 'sdkmanager "platform-tools" "platforms;android-29" "emulator" "extras;google;m2repository" "build-tools;29.0.2"'
@@ -41,6 +42,7 @@ blocks:
             - docker exec -ti android emulator -no-window -avd ci-test-pixel-x86-64-api29 -no-boot-anim -no-audio -gpu off& # start emulator in the background
             - docker exec -ti android adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
             #- $SEMAPHORE_GIT_DIR/script/ci-wait-for-emulator.sh # wait till ready
+            - docker exec -ti android bash -c 'set ANDROID_SDK_ROOT=$ANDROID_HOME'
             - ( cd $SEMAPHORE_GIT_DIR && ./script/ci-tests-without-mailserver.sh )
 
             # store caches
