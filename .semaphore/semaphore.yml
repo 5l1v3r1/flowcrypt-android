@@ -20,7 +20,7 @@ blocks:
             - sudo rm -rf ~/.rbenv ~/.phpbrew
             - checkout && cd ~
             - cat /proc/cpuinfo
-            - docker run -d --rm --name android --device /dev/kvm semaphoreci/android:29 sleep 600
+            - docker run -d --rm --name android --device /dev/kvm semaphoreci/android:29-node sleep 600
 
             # restore caches
             - export SUM=$(checksum $SEMAPHORE_GIT_DIR/build.gradle)-$(checksum $SEMAPHORE_GIT_DIR/FlowCrypt/build.gradle)-$(checksum $SEMAPHORE_GIT_DIR/script/ci-install-android-sdk.sh)
