@@ -7,7 +7,7 @@ agent:
     os_image: ubuntu1804
   containers:
     - name: main
-      image: semaphoreci/android:29
+      image: semaphoreci/android:29-node
 
 blocks:
   - name: Test without mailserver
